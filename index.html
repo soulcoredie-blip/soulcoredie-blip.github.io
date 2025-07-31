@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Электрик Анатолий - технологии 2077 года</title>
-    <!-- Аудио элемент с автовоспроизведением -->
-    <audio id="bgMusic" autoplay loop volume="0.5">
-        <source src="1.mp3" type="audio/mpeg">
-    </audio>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         
@@ -50,7 +45,7 @@
         header {
             background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
             color: var(--neon-blue);
-            padding: 30px 0;
+            padding: 15px 0; /* Уменьшил padding */
             text-align: center;
             border-bottom: 2px solid var(--neon-blue);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -82,7 +77,7 @@
         
         h1 {
             margin: 0;
-            font-size: 3em;
+            font-size: 1.5em; /* Уменьшил размер шрифта в 2 раза */
             text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
             letter-spacing: 2px;
             position: relative;
@@ -280,6 +275,44 @@
             margin-bottom: 10px;
         }
         
+        /* Стили для кнопки включения звука */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .sound-toggle:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .sound-toggle i {
+            font-size: 20px;
+        }
+        
+        /* Стили для вставленных GIF в списке работ */
+        .work-gif {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+        
         @media (max-width: 900px) {
             .gif-container {
                 flex-direction: column;
@@ -296,7 +329,7 @@
         
         @media (max-width: 600px) {
             h1 {
-                font-size: 2em;
+                font-size: 1.2em; /* Уменьшил размер для мобильных */
             }
             
             .photo, .gif-window {
@@ -306,8 +339,20 @@
             }
         }
     </style>
+    <!-- Иконки Font Awesome для кнопки звука -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Кнопка включения звука -->
+    <div class="sound-toggle" id="soundToggle">
+        <i class="fas fa-volume-mute"></i>
+    </div>
+    
+    <!-- Аудио элемент -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+    </audio>
+    
     <header>
         <div class="container">
             <h1>ЭЛЕКТРИК АНАТОЛИЙ 2077</h1>
@@ -317,7 +362,7 @@
     
     <div class="container">
         <div class="photo-container">
-            <img src="anatoliy.jpg" alt="Электрик Анатолий" class="photo">
+            <img src="https://images.unsplash.com/photo-1581093450023-8c2bccfca31a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Электрик Анатолий" class="photo">
         </div>
         
         <div class="contact-info">
@@ -327,7 +372,7 @@
         <div class="cloud-section">
             <div class="gif-container">
                 <div class="gif-window">
-                    <img src="1.gif" alt="Технологии будущего">
+                    <img src="https://media.giphy.com/media/3o7TKsQ8UQ0Zq8VJg4/giphy.gif" alt="Технологии будущего">
                 </div>
                 
                 <div class="cloud-content">
@@ -336,7 +381,7 @@
                 </div>
                 
                 <div class="gif-window">
-                    <img src="2.gif" alt="Квантовые системы">
+                    <img src="https://media.giphy.com/media/l0HU7JI1nzKC7kUu4/giphy.gif" alt="Квантовые системы">
                 </div>
             </div>
         </div>
@@ -361,6 +406,11 @@
             <div class="work-item">
                 <h4>Плазменные стабилизаторы</h4>
                 <p>Настройка плазменных генераторов для стабильного энергоснабжения</p>
+            </div>
+            
+            <!-- Первый GIF в середине списка -->
+            <div style="break-inside: avoid; column-span: all; text-align: center; margin: 20px 0;">
+                <img src="https://media.giphy.com/media/3o7TKsQ8UQ0Zq8VJg4/giphy.gif" alt="Технологии будущего" class="work-gif">
             </div>
             
             <div class="work-item">
@@ -388,6 +438,11 @@
                 <p>Монтаж энергосетей из самоорганизующихся наноматериалов</p>
             </div>
             
+            <!-- Второй GIF в конце списка -->
+            <div style="break-inside: avoid; column-span: all; text-align: center; margin: 20px 0;">
+                <img src="https://media.giphy.com/media/l0HU7JI1nzKC7kUu4/giphy.gif" alt="Квантовые системы" class="work-gif">
+            </div>
+            
             <div class="work-item">
                 <h4>Голомозговые интерфейсы</h4>
                 <p>Интеграция энергосистем с коллективным разумом</p>
@@ -413,17 +468,50 @@
     </footer>
 
     <script>
-        // Попытка автоматического воспроизведения при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            const music = document.getElementById('bgMusic');
-            music.play().catch(e => {
-                // Если автовоспроизведение заблокировано, пробуем при первом клике
-                document.body.addEventListener('click', function initAudio() {
-                    music.play();
-                    document.body.removeEventListener('click', initAudio);
-                }, { once: true });
+        // Управление звуком
+        const soundToggle = document.getElementById('soundToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        
+        // Инициализация звука
+        function initAudio() {
+            bgMusic.volume = 0.5;
+            soundToggle.addEventListener('click', toggleAudio);
+            
+            // Попытка автоматического воспроизведения (может не сработать)
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                updateIcon();
+            }).catch(e => {
+                console.log("Автовоспроизведение заблокировано");
             });
-        });
+        }
+        
+        // Переключение звука
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+            } else {
+                bgMusic.play();
+            }
+            isPlaying = !isPlaying;
+            updateIcon();
+        }
+        
+        // Обновление иконки
+        function updateIcon() {
+            const icon = soundToggle.querySelector('i');
+            if (isPlaying) {
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            } else {
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            }
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', initAudio);
     </script>
 </body>
 </html>
