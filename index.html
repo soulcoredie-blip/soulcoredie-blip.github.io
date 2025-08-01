@@ -19,6 +19,7 @@
             --dark-bg: #0a0a1a;
             --darker-bg: #050510;
             --cloud-pink: rgba(255, 0, 255, 0.15);
+            --cloud-blue: rgba(0, 255, 255, 0.15);
         }
         
         body {
@@ -38,119 +39,160 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-            background-color: rgba(10, 10, 30, 0.8);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            border: 1px solid var(--neon-blue);
-            border-radius: 5px;
             position: relative;
             z-index: 1;
-            backdrop-filter: blur(5px);
         }
         
+        /* Стили для сверкающего баннера */
         header {
             background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
             color: var(--neon-blue);
-            padding: 30px 0;
+            padding: 40px 0;
             text-align: center;
             border-bottom: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent 45%,
-                rgba(0, 255, 255, 0.1) 50%,
-                transparent 55%
-            );
-            animation: shine 6s infinite linear;
-        }
-        
-        @keyframes shine {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 3em;
-            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
-            letter-spacing: 2px;
-            position: relative;
-            animation: pulse 2s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            from { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
-            to { text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 40px var(--neon-pink); }
         }
         
         .banner {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 40px;
+            margin: 0 auto;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(
+                45deg,
+                var(--neon-blue) 0%,
+                var(--neon-pink) 50%,
+                var(--neon-blue) 100%
+            );
+            z-index: -1;
+            border-radius: 10px;
+            opacity: 0.7;
+            filter: blur(15px);
+            animation: banner-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes banner-glow {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.9; }
+        }
+        
+        .photo-wrapper {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 20px var(--neon-blue),
+                0 0 40px var(--neon-pink);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .photo-wrapper:hover {
+            transform: perspective(1000px) rotateY(5deg);
+            box-shadow: 
+                0 0 30px var(--neon-blue),
+                0 0 60px var(--neon-pink);
+        }
+        
+        .photo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 255, 255, 0.1) 0%,
+                rgba(255, 0, 255, 0.1) 50%,
+                rgba(0, 255, 255, 0.1) 100%
+            );
+            z-index: 1;
+            animation: photo-shine 5s linear infinite;
+        }
+        
+        @keyframes photo-shine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
         }
         
         .banner-text {
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
-        .contact-info {
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            border: 1px solid var(--neon-pink);
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-            text-shadow: 0 0 5px #fff;
+        h1 {
+            margin: 0;
+            font-size: 3.5em;
+            text-shadow: 
+                0 0 10px var(--neon-blue), 
+                0 0 20px var(--neon-blue),
+                0 0 30px var(--neon-pink);
+            letter-spacing: 3px;
+            position: relative;
+            animation: pulse 2s infinite alternate;
+            background: linear-gradient(
+                to right,
+                var(--neon-blue),
+                var(--neon-pink),
+                var(--neon-blue)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: text-gradient 3s linear infinite;
         }
         
-        .contact-info strong {
-            color: var(--neon-blue);
+        @keyframes text-gradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
         
-        .photo {
-            width: 300px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 5px;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-            transition: all 0.3s ease;
-            filter: brightness(1.1) contrast(1.1);
-        }
-        
-        .photo:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
-        }
-        
-        .cloud-section {
-            background: var(--cloud-pink);
+        /* Стили для неоновых облаков */
+        .neon-cloud {
+            background: linear-gradient(135deg, var(--cloud-pink), var(--cloud-blue));
             border-radius: 20px;
             padding: 30px;
-            margin: 40px 0;
+            margin: 30px 0;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+            box-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.3),
+                0 0 40px rgba(0, 255, 255, 0.2);
             border: 1px solid var(--neon-pink);
+            backdrop-filter: blur(5px);
         }
         
-        .cloud-section::before {
+        .neon-cloud::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -170,73 +212,124 @@
             100% { transform: translate(0, 0); }
         }
         
-        .gif-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Стили для центрированных гифок */
+        .centered-gif {
+            text-align: center;
+            margin: 40px auto;
+            max-width: 600px;
+        }
+        
+        .centered-gif img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 
+                0 0 20px var(--neon-blue),
+                0 0 40px var(--neon-pink);
+        }
+        
+        /* Стили для контактной информации */
+        .contact-info {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(10, 10, 30, 0.7));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 30px 0;
+            border: 1px solid var(--neon-pink);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+            text-shadow: 0 0 5px #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--neon-pink), 
+                var(--neon-blue), 
+                var(--neon-pink), 
+                transparent);
+        }
+        
+        .contact-info strong {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        /* Стили для списка работ */
+        .two-columns {
+            column-count: 2;
+            column-gap: 30px;
             margin: 30px 0;
         }
         
-        .gif-window {
-            width: 300px;
-            height: 300px;
-            border-radius: 15px;
+        .work-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid var(--neon-pink);
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
-            position: relative;
         }
         
-        .gif-window img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .work-item:hover {
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+            transform: translateY(-3px);
         }
         
-        .cloud-content {
-            flex-grow: 1;
-            padding: 0 30px;
-            text-align: center;
-        }
-        
-        h2 {
+        .work-item h4 {
             color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            position: relative;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), transparent);
-        }
-        
-        ul, ol {
-            padding-left: 20px;
-        }
-        
-        li {
+            margin-top: 0;
             margin-bottom: 10px;
-            position: relative;
-            padding-left: 20px;
+            font-size: 1.3em;
         }
         
-        li::before {
-            content: '⚡';
+        .work-item p {
+            margin: 0;
+        }
+        
+        /* Стили для списка с цифрами */
+        ol {
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        ol li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1em;
+            list-style-type: none;
+            counter-increment: step-counter;
+        }
+        
+        ol li::before {
+            content: counter(step-counter);
             color: var(--neon-pink);
+            font-weight: bold;
             position: absolute;
             left: 0;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px var(--neon-pink);
         }
         
+        /* Стили для подвала */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             background: linear-gradient(180deg, var(--dark-bg), var(--darker-bg));
             color: white;
             margin-top: 50px;
@@ -260,71 +353,26 @@
                 transparent);
         }
         
-        .two-columns {
-            column-count: 2;
-            column-gap: 30px;
-        }
-        
-        .work-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            border-left: 3px solid var(--neon-pink);
-            transition: all 0.3s ease;
-        }
-        
-        .work-item:hover {
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-        }
-        
-        .work-item h4 {
-            color: var(--neon-blue);
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        .mid-gif, .end-gif {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .mid-gif img, .end-gif img {
-            max-width: 100%;
-            border-radius: 15px;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
-        }
-        
+        /* Адаптивность */
         @media (max-width: 900px) {
-            .gif-container {
+            .banner {
                 flex-direction: column;
-            }
-            
-            .gif-window {
-                margin: 20px auto;
+                gap: 20px;
             }
             
             .two-columns {
                 column-count: 1;
             }
-            
-            .banner {
-                flex-direction: column;
-            }
         }
         
         @media (max-width: 600px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             
-            .photo, .gif-window {
-                width: 100%;
-                height: auto;
-                max-width: 300px;
+            .photo-wrapper {
+                width: 250px;
+                height: 350px;
             }
         }
     </style>
@@ -333,7 +381,9 @@
     <header>
         <div class="container">
             <div class="banner">
-                <img src="anatoliy.jpg" alt="Электрик Анатолий" class="photo">
+                <div class="photo-wrapper">
+                    <img src="anatoliy.jpg" alt="Электрик Анатолий" class="photo">
+                </div>
                 <div class="banner-text">
                     <h1>ЭЛЕКТРИК АНАТОЛИЙ 2077</h1>
                     <p>Квантовые энергосистемы и нейроэлектрические интерфейсы</p>
@@ -343,82 +393,88 @@
     </header>
     
     <div class="container">
-        <div class="contact-info">
-            <strong>ГРАФИК РАБОТЫ:</strong> Пн-Вс, 8:00-20:00 | <strong>ЭКСТРЕННЫЙ ВЫЗОВ:</strong> 24/7
-        </div>
-        
-        <div class="cloud-section">
-            <div class="gif-container">
-                <div class="gif-window">
-                    <img src="1.gif" alt="Технологии будущего">
-                </div>
-                
-                <div class="cloud-content">
-                    <h2>ИННОВАЦИОННЫЕ ТЕХНОЛОГИИ</h2>
-                    <p>В 2077 году электричество - это не просто ток в проводах, это живая энергия, которую я умею направлять и контролировать. Мои технологии позволяют подключаться к городской энергосети через нейроинтерфейс и диагностировать проблемы на расстоянии световых лет.</p>
-                </div>
-                
-                <div class="gif-window">
-                    <img src="2.gif" alt="Квантовые системы">
-                </div>
+        <div class="neon-cloud">
+            <div class="contact-info">
+                <strong>ГРАФИК РАБОТЫ:</strong> Пн-Вс, 8:00-20:00 | <strong>ЭКСТРЕННЫЙ ВЫЗОВ:</strong> 24/7
             </div>
         </div>
         
-        <h2>ПОЛНЫЙ ПЕРЕЧЕНЬ РАБОТ</h2>
-        <div class="two-columns">
-            <div class="work-item">
-                <h4>Квантовая проводка</h4>
-                <p>Монтаж энергоканалов с использованием запутанных частиц для мгновенной передачи энергии</p>
-            </div>
+        <div class="neon-cloud">
+            <h2>ИННОВАЦИОННЫЕ ТЕХНОЛОГИИ</h2>
+            <p>В 2077 году электричество - это не просто ток в проводах, это живая энергия, которую я умею направлять и контролировать. Мои технологии позволяют подключаться к городской энергосети через нейроинтерфейс и диагностировать проблемы на расстоянии световых лет.</p>
             
-            <div class="work-item">
-                <h4>Нейроразъёмы</h4>
-                <p>Установка интерфейсов для прямого нейронного подключения к энергосетям</p>
-            </div>
-            
-            <div class="work-item">
-                <h4>Голографические щиты</h4>
-                <p>Проекция энергораспределительных систем в 3D-пространстве с тактильной обратной связью</p>
-            </div>
-            
-            <div class="work-item">
-                <h4>Плазменные стабилизаторы</h4>
-                <p>Настройка плазменных генераторов для стабильного энергоснабжения</p>
-            </div>
-            
-            <div class="mid-gif">
+            <div class="centered-gif">
                 <img src="1.gif" alt="Технологии будущего">
             </div>
             
-            <div class="work-item">
-                <h4>Телепортационные розетки</h4>
-                <p>Монтаж точек доступа для передачи энергии через пространственные порталы</p>
+            <p>Использую только квантовые инструменты и голографические системы диагностики. Ваша электропроводка будет работать даже в условиях временных аномалий и гравитационных возмущений.</p>
+        </div>
+        
+        <div class="neon-cloud">
+            <h2>ПОЛНЫЙ ПЕРЕЧЕНЬ РАБОТ</h2>
+            <div class="two-columns">
+                <div class="work-item">
+                    <h4>Квантовая проводка</h4>
+                    <p>Монтаж энергоканалов с использованием запутанных частиц для мгновенной передачи энергии</p>
+                </div>
+                
+                <div class="work-item">
+                    <h4>Нейроразъёмы</h4>
+                    <p>Установка интерфейсов для прямого нейронного подключения к энергосетям</p>
+                </div>
+                
+                <div class="work-item">
+                    <h4>Голографические щиты</h4>
+                    <p>Проекция энергораспределительных систем в 3D-пространстве с тактильной обратной связью</p>
+                </div>
+                
+                <div class="work-item">
+                    <h4>Плазменные стабилизаторы</h4>
+                    <p>Настройка плазменных генераторов для стабильного энергоснабжения</p>
+                </div>
             </div>
             
-            <div class="work-item">
-                <h4>Кибернетические предохранители</h4>
-                <p>Установка самообучающихся систем защиты от перегрузок</p>
+            <div class="centered-gif">
+                <img src="1.gif" alt="Технологии будущего">
             </div>
             
-            <div class="work-item">
-                <h4>Темпопотенциальные регуляторы</h4>
-                <p>Настройка устройств, стабилизирующих энергопотоки во временных аномалиях</p>
+            <div class="two-columns">
+                <div class="work-item">
+                    <h4>Телепортационные розетки</h4>
+                    <p>Монтаж точек доступа для передачи энергии через пространственные порталы</p>
+                </div>
+                
+                <div class="work-item">
+                    <h4>Кибернетические предохранители</h4>
+                    <p>Установка самообучающихся систем защиты от перегрузок</p>
+                </div>
+                
+                <div class="work-item">
+                    <h4>Темпопотенциальные регуляторы</h4>
+                    <p>Настройка устройств, стабилизирующих энергопотоки во временных аномалиях</p>
+                </div>
             </div>
             
-            <div class="end-gif">
+            <div class="centered-gif">
                 <img src="2.gif" alt="Квантовые системы">
             </div>
         </div>
         
-        <h2>КАК Я РАБОТАЮ В 2077 ГОДУ</h2>
-        <ol>
-            <li>Вы отправляете квантовый сигнал через нейросеть</li>
-            <li>Я мгновенно телепортируюсь к вам с помощью пространственного деформатора</li>
-            <li>Провожу голографическую диагностику энергопотоков</li>
-            <li>Предлагаю несколько вариантов решения с симуляцией в виртуальной реальности</li>
-            <li>Выполняю ремонт с использованием нанороботов и плазменных инструментов</li>
-            <li>Активирую систему автономного мониторинга через квантовую запутанность</li>
-        </ol>
+        <div class="neon-cloud">
+            <h2>КАК Я РАБОТАЮ В 2077 ГОДУ</h2>
+            <ol>
+                <li>Вы отправляете квантовый сигнал через нейросеть</li>
+                <li>Я мгновенно телепортируюсь к вам с помощью пространственного деформатора</li>
+                <li>Провожу голографическую диагностику энергопотоков</li>
+                <li>Предлагаю несколько вариантов решения с симуляцией в виртуальной реальности</li>
+                <li>Выполняю ремонт с использованием нанороботов и плазменных инструментов</li>
+                <li>Активирую систему автономного мониторинга через квантовую запутанность</li>
+            </ol>
+            
+            <div class="centered-gif">
+                <img src="2.gif" alt="Квантовые системы">
+            </div>
+        </div>
     </div>
     
     <footer>
